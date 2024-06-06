@@ -10,7 +10,7 @@ namespace MathGraph.Model
     {
         protected List<double>? m_Points;
 
-        public List<double>? Values
+        public List<double>? Points
         { 
             get => m_Points;
             set => m_Points = value; 
