@@ -8,17 +8,29 @@ namespace MathGraph.Model
 {
     internal class BaseMathFunction : IMathFunction
     {
-        public string? m_Function;
+        // представляет прямой ввод функции от пользователя
+        private string m_RawFunction = "";
+        // представляет обработанное для вычислителя представление (строка) функции 
+        private string m_Function = "";
 
-        public int SetFunction
-            { 
-            get => throw new NotImplementedException(); 
-            set => throw new NotImplementedException(); 
+        public string SetFunction
+        { 
+            get => m_RawFunction;
+            set
+            {
+                m_Function = Parse(value);
+                m_RawFunction = value;
+            } 
         }
 
-        public double SolveFunction()
+        public double SolveFunction(double x)
         {
-            throw new NotImplementedException();
+            return 0;
+        }
+
+        private string Parse(string input)
+        {
+            return "";
         }
     }
 }
