@@ -10,10 +10,8 @@ namespace MathGraph.Model
     internal interface ISolver
     {
         public void SetFunction(string f);
-        public List<Vector2> GetGraph();
-        public void SetRange(Vector2 vec);
-        public Vector2 GetRange();
-        public void SetAccuracy(double val);
-        public double GetAccuracy();
+        public List<double> GetGraph();
+        public Vector2 AreaRange { get; set; }
+        public double Accuracy { get; set; }
     }
 }
