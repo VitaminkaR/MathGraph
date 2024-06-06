@@ -9,9 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
+    <None Remove="View\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="View\icon.ico" />
   </ItemGroup>
 
 </Project>
