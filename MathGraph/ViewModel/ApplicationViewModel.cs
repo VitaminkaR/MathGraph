@@ -79,7 +79,7 @@ namespace MathGraph.ViewModel
         {
             Vector2 range = m_Solver.AreaRange;
             float drange = Math.Abs(range.X - range.Y);
-            Accuracy = drange / MAP_AREA_WIDTH;
+            Accuracy = drange / App.MAP_AREA_WIDTH;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
