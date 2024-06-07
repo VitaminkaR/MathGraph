@@ -75,6 +75,14 @@ namespace MathGraph.ViewModel
             };
         }
 
+        // посчитывает аккуратность, чтобы каждое значение x занимало 1 пиксель
+        private void AutoAccuracyEval()
+        {
+            Vector2 range = m_Solver.AreaRange;
+            float drange = Math.Abs(range.X - range.Y);
+            Accuracy = drange / MAP_AREA_WIDTH;
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
