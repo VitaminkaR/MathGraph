@@ -63,6 +63,8 @@ namespace MathGraph.ViewModel
             get => m_SolveDrawCommand;
         }
 
+        public Action<List<double>> OnGraphSolved { get; set; }
+
         public ApplicationViewModel()
         {
             m_Solver = new Solver();
@@ -72,6 +74,7 @@ namespace MathGraph.ViewModel
                 Action = (object? param) =>
                 {
                     m_Solver.SolveGraph();
+                    OnGraphSolved?.Invoke(m_Solver.GetGraph());
                 }
             };
         }
