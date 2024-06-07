@@ -36,8 +36,8 @@ namespace MathGraph.Model
             m_MathFunction = new BaseMathFunction();
             Function = "Pow(x, 2)+3*x-7";
             m_DrawArea = new BaseDrawArea();
-            m_DrawArea.Range = new Vector2(-10, 10);
-            m_DrawArea.Accuracy = 0.001d;
+            AreaRange = new Vector2(-10, 10);
+            Accuracy = 0.001d;
             m_Graph = new BaseGraph();
         }
 
