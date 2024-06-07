@@ -13,5 +13,6 @@ namespace MathGraph.Model
         public Vector2 AreaRange { get; set; }
         public double Accuracy { get; set; }
         public string Function { get; set; }
+        public void SolveGraph();
     }
 }

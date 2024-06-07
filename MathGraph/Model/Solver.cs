@@ -4,6 +4,8 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using NCalc;
 
 namespace MathGraph.Model
 {
@@ -41,7 +43,18 @@ namespace MathGraph.Model
             m_Graph = new BaseGraph();
         }
 
-        public List<double> GetGraph() => m_Graph.Points;
+        public void SolveGraph()
+        {
+            m_Graph.ClearGraph();
+            double acc = m_DrawArea.Accuracy;
+            for (double x = m_DrawArea.Range.X; x <= m_DrawArea.Range.Y;)
+            {
+                double value = m_MathFunction.SolveFunction(x);
+                m_Graph.AddPoint(value);
+                x += acc;
+            }
+        }
 
+        public List<double> GetGraph() => m_Graph.Points;
     }
 }

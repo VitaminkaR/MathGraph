@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,12 +26,14 @@ namespace MathGraph.Model
 
         public double SolveFunction(double x)
         {
-            return 0;
+            NCalc.Expression expression = new NCalc.Expression(m_Function);
+            expression.Parameters["x"] = x;
+            return (double)Convert.ToDecimal(expression.Evaluate());
         }
 
         private string Parse(string input)
         {
-            return "";
+            return input;
         }
     }
 }

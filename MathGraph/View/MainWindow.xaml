@@ -17,5 +17,7 @@
 
         <Label Content="Введите функцию графика: " HorizontalContentAlignment="Center" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="95"  Canvas.Left="815" Width="455"/>
         <TextBox Name="TB_Function"  Canvas.Right="32" TextWrapping="Wrap" Text="{Binding Function}" BorderThickness="2" BorderBrush="Black" Canvas.Top="130" Width="414" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+
+        <Button Name="B_SolveFunction" Content="Solve"  Command="{Binding SolveDrawCommand}" Canvas.Right="32" BorderThickness="2" BorderBrush="Black" Canvas.Top="160" Width="128" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
     </Canvas>
 </Window>
