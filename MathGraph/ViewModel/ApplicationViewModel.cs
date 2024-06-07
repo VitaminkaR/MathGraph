@@ -21,6 +21,7 @@ namespace MathGraph.ViewModel
             set
             {
                 m_Solver.AreaRange = new Vector2((float)value, m_Solver.AreaRange.Y);
+                AutoAccuracyEval();
                 OnPropertyChanged("DrawAreaXMinRange");
             }
         }
@@ -31,6 +32,7 @@ namespace MathGraph.ViewModel
             set
             {
                 m_Solver.AreaRange = new Vector2(m_Solver.AreaRange.X, (float)value);
+                AutoAccuracyEval();
                 OnPropertyChanged("DrawAreaXMaxMRange");
             }
         }
