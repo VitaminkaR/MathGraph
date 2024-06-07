@@ -7,6 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MathGraph.ViewModel
 {
@@ -44,6 +45,15 @@ namespace MathGraph.ViewModel
             }
         }
 
+        public string Function
+        {
+            get => m_Solver.Function;
+            set
+            {
+                m_Solver.Function = value;
+                OnPropertyChanged("Function");
+            }
+        }
         public ApplicationViewModel()
         {
             m_Solver = new Solver();
