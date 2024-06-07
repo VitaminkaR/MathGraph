@@ -55,8 +55,7 @@ namespace MathGraph.ViewModel
             }
         }
 
-        public BaseCommand m_SolveDrawCommand;
-
+        private BaseCommand m_SolveDrawCommand;
         public BaseCommand SolveDrawCommand
         {
             get => m_SolveDrawCommand;
