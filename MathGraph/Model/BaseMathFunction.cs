@@ -13,7 +13,7 @@ namespace MathGraph.Model
         // представляет обработанное для вычислителя представление (строка) функции 
         private string m_Function = "";
 
-        public string SetFunction
+        public string Function
         { 
             get => m_RawFunction;
             set

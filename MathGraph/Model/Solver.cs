@@ -25,9 +25,16 @@ namespace MathGraph.Model
             set => m_DrawArea.Range = value;
         }
 
+        public string Function 
+        {
+            get => m_MathFunction.Function;
+            set => m_MathFunction.Function = value;
+        }
+
         public Solver()
         {
             m_MathFunction = new BaseMathFunction();
+            Function = "Pow(x, 2)+3*x-7";
             m_DrawArea = new BaseDrawArea();
             m_DrawArea.Range = new Vector2(-10, 10);
             m_DrawArea.Accuracy = 0.001d;
@@ -36,6 +43,5 @@ namespace MathGraph.Model
 
         public List<double> GetGraph() => m_Graph.Points;
 
-        public void SetFunction(string f) => m_MathFunction.SetFunction = f;
     }
 }

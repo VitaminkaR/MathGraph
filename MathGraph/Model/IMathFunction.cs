@@ -8,7 +8,7 @@ namespace MathGraph.Model
 {
     internal interface IMathFunction
     {
-        public string SetFunction { get; set; }
+        public string Function { get; set; }
         public double SolveFunction(double x);
     }
 }

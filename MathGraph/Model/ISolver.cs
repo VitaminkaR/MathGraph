@@ -9,9 +9,9 @@ namespace MathGraph.Model
 {
     internal interface ISolver
     {
-        public void SetFunction(string f);
         public List<double> GetGraph();
         public Vector2 AreaRange { get; set; }
         public double Accuracy { get; set; }
+        public string Function { get; set; }
     }
 }
