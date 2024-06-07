@@ -54,9 +54,25 @@ namespace MathGraph.ViewModel
                 OnPropertyChanged("Function");
             }
         }
+
+        public BaseCommand m_SolveDrawCommand;
+
+        public BaseCommand SolveDrawCommand
+        {
+            get => m_SolveDrawCommand;
+        }
+
         public ApplicationViewModel()
         {
             m_Solver = new Solver();
+
+            m_SolveDrawCommand = new BaseCommand()
+            {
+                Action = (object? param) =>
+                {
+                    m_Solver.SolveGraph();
+                }
+            };
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
