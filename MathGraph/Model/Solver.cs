@@ -43,7 +43,7 @@ namespace MathGraph.Model
             m_Graph = new BaseGraph();
         }
 
-        public void SolveGraph()
+        public Vector2 SolveGraph()
         {
             m_Graph.ClearGraph();
             double acc = m_DrawArea.Accuracy;
@@ -53,6 +53,8 @@ namespace MathGraph.Model
                 m_Graph.AddPoint(value);
                 x += acc;
             }
+
+            return new Vector2((int)GetGraph().Min(), (int)GetGraph().Max());
         }
 
         public List<double> GetGraph() => m_Graph.Points;
