@@ -11,5 +11,6 @@ namespace MathGraph.Model
         public List<double>? Points { get; set; }
         public void AddPoint(double val);
         public void RemovePoint(double val);
+        public void ClearGraph();
     }
 }

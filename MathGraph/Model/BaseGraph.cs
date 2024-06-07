@@ -8,22 +8,23 @@ namespace MathGraph.Model
 {
     internal class BaseGraph : IGraph
     {
-        protected List<double>? m_Points;
+        protected List<double> m_Points;
 
-        public List<double>? Points
+        public List<double> Points
         { 
             get => m_Points;
             set => m_Points = value; 
         }
 
-        public void AddPoint(double val)
-        {
-            throw new NotImplementedException();
+        public BaseGraph() 
+        { 
+            Points = new List<double>();
         }
 
-        public void RemovePoint(double val)
-        {
-            throw new NotImplementedException();
-        }
+        public void AddPoint(double val) => m_Points.Add(val);
+
+        public void ClearGraph() => m_Points.Clear();
+
+        public void RemovePoint(double val) => m_Points.Remove(val);
     }
 }
