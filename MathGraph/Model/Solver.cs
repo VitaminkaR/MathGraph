@@ -36,7 +36,7 @@ namespace MathGraph.Model
         public Solver()
         {
             m_MathFunction = new BaseMathFunction();
-            Function = "Pow(x, 2)+3*x-7";
+            Function = "Pw(x, 2)";
             m_DrawArea = new BaseDrawArea();
             AreaRange = new Vector2(-10, 10);
             Accuracy = 0.001d;
@@ -50,7 +50,9 @@ namespace MathGraph.Model
             for (double x = m_DrawArea.Range.X; x <= m_DrawArea.Range.Y;)
             {
                 double value = m_MathFunction.SolveFunction(x);
-                m_Graph.AddPoint(value);
+                string[]? mc = m_MathFunction.GetMathCondition();
+                if(mc == null)
+                    m_Graph.AddPoint(value);
                 x += acc;
             }
 

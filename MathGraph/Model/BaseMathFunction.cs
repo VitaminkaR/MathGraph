@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NCalc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -28,6 +29,23 @@ namespace MathGraph.Model
                 m_Expression = new NCalc.Expression(m_Function);
                 m_Expression.Parameters["pi"] = Math.PI;
                 m_Expression.Parameters["e"] = Math.E;
+                m_Expression.EvaluateFunction += delegate (string name, FunctionArgs args)
+                {
+                    // возведение в степень (встроенная функция возведения вызывает ошибки)
+                    if (name == "Pw")
+                    {
+                        double arg1 = Convert.ToDouble(args.Parameters[0].Evaluate());
+                        double arg2 = Convert.ToDouble(args.Parameters[1].Evaluate());
+                        double res = Math.Pow(arg1, arg2);
+                        if (double.IsNaN(res))
+                        {
+                            res = 0;
+                            m_MathCondition = new string[1] { "pwfuncerr" };
+                        }
+                        args.Result = res;
+                    }  
+                };
+
                 m_RawFunction = value;
             } 
         }
