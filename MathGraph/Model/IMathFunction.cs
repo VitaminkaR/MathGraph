@@ -10,5 +10,7 @@ namespace MathGraph.Model
     {
         public string Function { get; set; }
         public double SolveFunction(double x);
+        // возвращает мат условие (например если при подсчете функции было подсчитано комплексное число (должно быть возвращена информация об ошибке))
+        public string[]? GetMathCondition();
     }
 }

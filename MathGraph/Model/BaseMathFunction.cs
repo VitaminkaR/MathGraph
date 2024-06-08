@@ -14,6 +14,8 @@ namespace MathGraph.Model
         // представляет обработанное для вычислителя представление (строка) функции 
         private string m_Function = "";
 
+        private string[]? m_MathCondition;
+
         private NCalc.Expression m_Expression;
 
         public string Function
@@ -25,6 +27,13 @@ namespace MathGraph.Model
                 m_Expression = new NCalc.Expression(m_Function);
                 m_RawFunction = value;
             } 
+        }
+
+        public string[]? GetMathCondition()
+        {
+            string[]? mc = m_MathCondition;
+            m_MathCondition = null;
+            return mc;
         }
 
         public double SolveFunction(double x)
