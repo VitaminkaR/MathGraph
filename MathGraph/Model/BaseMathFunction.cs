@@ -24,7 +24,10 @@ namespace MathGraph.Model
             set
             {
                 m_Function = Parse(value);
+
                 m_Expression = new NCalc.Expression(m_Function);
+                m_Expression.Parameters["pi"] = Math.PI;
+                m_Expression.Parameters["e"] = Math.E;
                 m_RawFunction = value;
             } 
         }
@@ -39,6 +42,7 @@ namespace MathGraph.Model
         public double SolveFunction(double x)
         {
             m_Expression.Parameters["x"] = x;
+
             return (double)Convert.ToDecimal(m_Expression.Evaluate());
         }
 
