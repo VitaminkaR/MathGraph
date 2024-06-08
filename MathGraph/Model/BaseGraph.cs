@@ -23,7 +23,7 @@ namespace MathGraph.Model
 
         public void AddPoint(double val) => m_Points.Add(val);
 
-        public void ClearGraph() => m_Points.Clear();
+        public void ClearGraph() => m_Points = new List<double>();
 
         public void RemovePoint(double val) => m_Points.Remove(val);
     }

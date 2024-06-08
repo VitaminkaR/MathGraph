@@ -14,21 +14,23 @@ namespace MathGraph.Model
         // представляет обработанное для вычислителя представление (строка) функции 
         private string m_Function = "";
 
+        private NCalc.Expression m_Expression;
+
         public string Function
         { 
             get => m_RawFunction;
             set
             {
                 m_Function = Parse(value);
+                m_Expression = new NCalc.Expression(m_Function);
                 m_RawFunction = value;
             } 
         }
 
         public double SolveFunction(double x)
         {
-            NCalc.Expression expression = new NCalc.Expression(m_Function);
-            expression.Parameters["x"] = x;
-            return (double)Convert.ToDecimal(expression.Evaluate());
+            m_Expression.Parameters["x"] = x;
+            return (double)Convert.ToDecimal(m_Expression.Evaluate());
         }
 
         private string Parse(string input)
