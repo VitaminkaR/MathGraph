@@ -7,6 +7,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MathGraph.ViewModel
@@ -63,7 +64,7 @@ namespace MathGraph.ViewModel
             get => m_SolveDrawCommand;
         }
 
-        public Action<List<double>> OnGraphSolved { get; set; }
+        public Action<List<Point>> OnGraphSolved { get; set; }
 
         public ApplicationViewModel()
         {

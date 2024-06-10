@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MathGraph.Model
 {
     internal class BaseGraph : IGraph
     {
-        protected List<double> m_Points;
+        protected List<Point> m_Points;
 
-        public List<double> Points
+        public List<Point> Points
         { 
             get => m_Points;
             set => m_Points = value; 
@@ -18,13 +19,13 @@ namespace MathGraph.Model
 
         public BaseGraph() 
         { 
-            Points = new List<double>();
+            Points = new List<Point>();
         }
 
-        public void AddPoint(double val) => m_Points.Add(val);
+        public void AddPoint(Point val) => m_Points.Add(val);
 
-        public void ClearGraph() => m_Points = new List<double>();
+        public void ClearGraph() => m_Points = new List<Point>();
 
-        public void RemovePoint(double val) => m_Points.Remove(val);
+        public void RemovePoint(Point val) => m_Points.Remove(val);
     }
 }

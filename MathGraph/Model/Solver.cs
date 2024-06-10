@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -43,7 +44,7 @@ namespace MathGraph.Model
             m_Graph = new BaseGraph();
         }
 
-        public Vector2 SolveGraph()
+        public void SolveGraph()
         {
             m_Graph.ClearGraph();
             double acc = m_DrawArea.Accuracy;
@@ -52,13 +53,11 @@ namespace MathGraph.Model
                 double value = m_MathFunction.SolveFunction(x);
                 string[]? mc = m_MathFunction.GetMathCondition();
                 if(mc == null)
-                    m_Graph.AddPoint(value);
+                    m_Graph.AddPoint(new Point(x, value));
                 x += acc;
-            }
-
-            return new Vector2((int)GetGraph().Min(), (int)GetGraph().Max());
+            };
         }
 
-        public List<double> GetGraph() => m_Graph.Points;
+        public List<Point> GetGraph() => m_Graph.Points;
     }
 }
