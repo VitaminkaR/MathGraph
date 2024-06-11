@@ -20,6 +20,9 @@ namespace MathGraph
     /// </summary>
     public partial class MainWindow : Window
     {
+        // разрыв графика функции
+        private bool m_MathGap;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -69,6 +72,19 @@ namespace MathGraph
                 double cx = points[i].X;
                 double cy = points[i].Y;
                 cy *= -1; // координаты элементов в wpf имеет противоположную направленность относительно декартовых координат
+
+                if (double.IsNaN(cx) && !m_MathGap)
+                {
+                    m_MathGap = true;
+                    Canvas_DrawArea.Children.Add(polyline);
+                    polyline = new Polyline();
+                    polyline.Stroke = Brushes.Red;
+                    polyline.StrokeThickness = 2;
+                }
+
+                if(m_MathGap && !double.IsNaN(cx))
+                    m_MathGap = false;
+
                 int x1coord = (int)(cx * xproj) + centerx;
                 int y1coord = (int)(cy * yproj) + centery;
 

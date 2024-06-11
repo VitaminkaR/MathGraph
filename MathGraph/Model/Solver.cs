@@ -54,6 +54,8 @@ namespace MathGraph.Model
                 string[]? mc = m_MathFunction.GetMathCondition();
                 if(mc == null)
                     m_Graph.AddPoint(new Point(x, value));
+                else
+                    m_Graph.AddPoint(new Point(double.NaN, 0));
                 x += acc;
             };
         }
