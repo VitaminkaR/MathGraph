@@ -41,7 +41,6 @@ namespace MathGraph
             polyline.Stroke = Brushes.Red;
             polyline.StrokeThickness = 2;
 
-            int points_count = points.Count;
             int width = (int)Canvas_DrawArea.Width; // ширина области
             int height = (int)Canvas_DrawArea.Height; // высота области
             int ofsx = (int)Canvas_DrawArea.Margin.Left; // координата x верхнего левого угла области
@@ -60,7 +59,6 @@ namespace MathGraph
             
             double xmin = double.Parse(TB_MinX.Text.Replace(".", ",")); // минимальное значение х на промежутке
             double xmax = double.Parse(TB_MaxX.Text.Replace(".", ",")); // максимальное значение х на промежутке
-            double acc = double.Parse(TB_Accuracy.Text.Replace(".", ",")); // точность при подсчете
 
             int centerx = width / 2; // центр области х
             double xproj = width / (xmax - xmin); // размер пикселя на значение
@@ -90,7 +88,7 @@ namespace MathGraph
 
                 if (y1coord >= height || y1coord <= ofsy)
                     continue;
-                if (x1coord >= width || x1coord <= 0)
+                if (x1coord >= width || x1coord <= ofsx)
                     continue;
 
                 polyline.Points.Add(new Point(x1coord, y1coord));
