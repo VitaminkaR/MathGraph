@@ -65,6 +65,9 @@ namespace MathGraph.ViewModel
         }
 
         public Action<List<Point>> OnGraphSolved { get; set; }
+        // обработчик ошибок
+        // 0 - ошика вычисления
+        public Action<int, string> OnError { get; set; }
 
         public ApplicationViewModel()
         {
@@ -74,9 +77,10 @@ namespace MathGraph.ViewModel
             {
                 Action = (object? param) =>
                 {
-                    m_Solver.SolveGraph();
+                    try { m_Solver.SolveGraph(); }
+                    catch (Exception e) { OnError?.Invoke(0, e.Message); }
                     OnGraphSolved?.Invoke(m_Solver.GetGraph());
-                }
+                    }
             };
         }
 

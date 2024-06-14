@@ -31,6 +31,22 @@ namespace MathGraph
 
             DataContext = new ApplicationViewModel();
             ((ApplicationViewModel)DataContext).OnGraphSolved += DrawGraph;
+            ((ApplicationViewModel)DataContext).OnError += ErrorHandler;
+        }
+
+        // обработчик ошибок
+        // 0 - ошика вычисления
+        private void ErrorHandler(int code, string errmsg)
+        {
+            switch (code)
+            {
+                case 0:
+                    MessageBox.Show($"Ошибка расчета функции\nПодробнее: {errmsg}", "Ошибка");
+                    break;
+                default:
+                    MessageBox.Show($"Ошибка\nПодробнее: {errmsg}", "Ошибка");
+                    break;
+            }
         }
 
         private void DrawGraph(List<Point> points)
