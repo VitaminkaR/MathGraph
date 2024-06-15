@@ -128,6 +128,7 @@ namespace MathGraph
             line.X1 = 0; line.X2 = width; line.Y1 = centery; line.Y2 = centery;
             Canvas_DrawArea.Children.Add(line);
             int step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
+            if (step <= 0) step = 1;
             for (int i = (int)xmin; i <= xmax; i += step)
             {
                 line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
@@ -148,6 +149,7 @@ namespace MathGraph
             line.X1 = centerx; line.X2 = centerx; line.Y1 = 0; line.Y2 = height;
             Canvas_DrawArea.Children.Add(line);
             step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
+            if (step <= 0) step = 1;
             for (int i = (int)xmin; i <= xmax; i += step)
             {
                 line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
