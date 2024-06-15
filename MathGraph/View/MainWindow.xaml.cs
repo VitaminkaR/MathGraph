@@ -146,9 +146,7 @@ namespace MathGraph
                 int x1coord = (int)(cx * xproj) + centerx;
                 int y1coord = (int)(cy * yproj) + centery;
 
-                if (y1coord >= height || y1coord <= 0)
-                    continue;
-                if (x1coord >= width || x1coord <= 0)
+                if ((y1coord >= height || y1coord <= 0) || (x1coord >= width || x1coord <= 0))
                     continue;
 
                 polyline.Points.Add(new Point(x1coord, y1coord));
