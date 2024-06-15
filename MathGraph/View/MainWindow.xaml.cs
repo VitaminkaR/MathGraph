@@ -79,9 +79,9 @@ namespace MathGraph
             double xmax = double.Parse(TB_MaxX.Text.Replace(".", ",")); // максимальное значение х на промежутке
 
             double xproj = width / (xmax - xmin); // размер пикселя на значение
-            double yproj = height / (xmax - xmin); // размер пикселя на значение
+            double yproj = height / (ymax - ymin); // размер пикселя на значение
             int centerx = (int)(width / 2 - (xmax + xmin) / 2 * xproj); // центр области х
-            int centery = height / 2; // центр области у
+            int centery = height - (int)(height / 2 - (ymax + ymin) / 2 * yproj); ; // центр области у
 
             // отрисовка осей
             DrawAxes(centery, centerx, xmin, xmax, ymin, ymax, xproj, yproj);
@@ -148,9 +148,9 @@ namespace MathGraph
             line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
             line.X1 = centerx; line.X2 = centerx; line.Y1 = 0; line.Y2 = height;
             Canvas_DrawArea.Children.Add(line);
-            step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
+            step = (int)Math.Pow(5, Math.Floor(Math.Log10(ymax - ymin)) - 1);
             if (step <= 0) step = 1;
-            for (int i = (int)xmin; i <= xmax; i += step)
+            for (int i = (int)ymin; i <= ymax; i += step)
             {
                 line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
                 line.X1 = centerx - 2; line.X2 = centerx + 2; line.Y1 = (int)(i * -1 * yproj) + centery; line.Y2 = (int)(i * -1 * yproj) + centery;
@@ -160,7 +160,7 @@ namespace MathGraph
                 // вычисляем размер текста до рендера, чтобы отцентрировать метку
                 l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Size s = l.DesiredSize;
-                l.Margin = new Thickness(centerx + 2, (int)(i * yproj) + centery - s.Height / 2, 0, 0);
+                l.Margin = new Thickness(centerx + 2, (int)(i * yproj * -1) + centery - s.Height / 2, 0, 0);
 
                 Canvas_DrawArea.Children.Add(line);
                 Canvas_DrawArea.Children.Add(l);
