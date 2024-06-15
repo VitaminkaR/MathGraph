@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -83,46 +84,7 @@ namespace MathGraph
             int centery = height / 2; // центр области у
 
             // отрисовка осей
-            // x
-            Line line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
-            line.X1 = 0; line.X2 = width; line.Y1 = centery; line.Y2 = centery;
-            Canvas_DrawArea.Children.Add(line);
-            int step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
-            for (int i = (int)xmin; i <= xmax; i+=step)
-            {
-                line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
-                line.X1 = (int)(i * xproj) + centerx; line.X2 = (int)(i * xproj) + centerx; line.Y1 = centery - 2; line.Y2 = centery + 2;
-
-                // метка для значения x
-                Label l = new Label(); l.FontSize = 8; l.Content = i.ToString();
-                // вычисляем размер текста до рендера, чтобы отцентрировать метку
-                l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                Size s = l.DesiredSize;
-                l.Margin = new Thickness((int)(i * xproj) + centerx - s.Width / 2, centery + 2, 0, 0);
-
-                Canvas_DrawArea.Children.Add(line);
-                Canvas_DrawArea.Children.Add(l);
-            }
-            // y
-            line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
-            line.X1 = centerx; line.X2 = centerx; line.Y1 = 0; line.Y2 = height;
-            Canvas_DrawArea.Children.Add(line);
-            step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
-            for (int i = (int)xmin; i <= xmax; i+=step)
-            {
-                line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
-                line.X1 = centerx - 2; line.X2 = centerx + 2; line.Y1 = (int)(i * -1 * yproj) + centery; line.Y2 = (int)(i * -1 * yproj) + centery;
-
-                // метка для значения y
-                Label l = new Label(); ; l.FontSize = 8; l.Content = (i * -1).ToString();
-                // вычисляем размер текста до рендера, чтобы отцентрировать метку
-                l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                Size s = l.DesiredSize;
-                l.Margin = new Thickness(centerx + 2, (int)(i * yproj) + centery - s.Height / 2, 0, 0);
-
-                Canvas_DrawArea.Children.Add(line);
-                Canvas_DrawArea.Children.Add(l);
-            }
+            DrawAxes(centery, centerx, xmin, xmax, ymin, ymax, xproj, yproj);
 
             for (int i = 0; i < points.Count; i++)
             {
@@ -153,6 +115,54 @@ namespace MathGraph
             }
 
             Canvas_DrawArea.Children.Add(polyline);
+        }
+
+        // отрисовка осей
+        private void DrawAxes(int centery, int centerx, double xmin, double xmax, double ymin, double ymax, double xproj, double yproj)
+        {
+            int width = (int)Canvas_DrawArea.Width; // ширина области
+            int height = (int)Canvas_DrawArea.Height; // высота области
+
+            // x
+            Line line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
+            line.X1 = 0; line.X2 = width; line.Y1 = centery; line.Y2 = centery;
+            Canvas_DrawArea.Children.Add(line);
+            int step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
+            for (int i = (int)xmin; i <= xmax; i += step)
+            {
+                line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
+                line.X1 = (int)(i * xproj) + centerx; line.X2 = (int)(i * xproj) + centerx; line.Y1 = centery - 2; line.Y2 = centery + 2;
+
+                // метка для значения x
+                Label l = new Label(); l.FontSize = 8; l.Content = i.ToString();
+                // вычисляем размер текста до рендера, чтобы отцентрировать метку
+                l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                Size s = l.DesiredSize;
+                l.Margin = new Thickness((int)(i * xproj) + centerx - s.Width / 2, centery + 2, 0, 0);
+
+                Canvas_DrawArea.Children.Add(line);
+                Canvas_DrawArea.Children.Add(l);
+            }
+            // y
+            line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
+            line.X1 = centerx; line.X2 = centerx; line.Y1 = 0; line.Y2 = height;
+            Canvas_DrawArea.Children.Add(line);
+            step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
+            for (int i = (int)xmin; i <= xmax; i += step)
+            {
+                line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
+                line.X1 = centerx - 2; line.X2 = centerx + 2; line.Y1 = (int)(i * -1 * yproj) + centery; line.Y2 = (int)(i * -1 * yproj) + centery;
+
+                // метка для значения y
+                Label l = new Label(); ; l.FontSize = 8; l.Content = (i * -1).ToString();
+                // вычисляем размер текста до рендера, чтобы отцентрировать метку
+                l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                Size s = l.DesiredSize;
+                l.Margin = new Thickness(centerx + 2, (int)(i * yproj) + centery - s.Height / 2, 0, 0);
+
+                Canvas_DrawArea.Children.Add(line);
+                Canvas_DrawArea.Children.Add(l);
+            }
         }
     }
 }
