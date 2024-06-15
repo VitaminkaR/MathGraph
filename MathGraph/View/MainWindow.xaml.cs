@@ -87,13 +87,14 @@ namespace MathGraph
             Line line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
             line.X1 = 0; line.X2 = width; line.Y1 = centery; line.Y2 = centery;
             Canvas_DrawArea.Children.Add(line);
-            for (int i = (int)xmin; i <= xmax; i++)
+            int step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
+            for (int i = (int)xmin; i <= xmax; i+=step)
             {
                 line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
                 line.X1 = (int)(i * xproj) + centerx; line.X2 = (int)(i * xproj) + centerx; line.Y1 = centery - 2; line.Y2 = centery + 2;
 
                 // метка для значения x
-                Label l = new Label(); l.Content = i.ToString();
+                Label l = new Label(); l.FontSize = 8; l.Content = i.ToString();
                 // вычисляем размер текста до рендера, чтобы отцентрировать метку
                 l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Size s = l.DesiredSize;
@@ -106,13 +107,14 @@ namespace MathGraph
             line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
             line.X1 = centerx; line.X2 = centerx; line.Y1 = 0; line.Y2 = height;
             Canvas_DrawArea.Children.Add(line);
-            for (int i = (int)xmin; i <= xmax; i++)
+            step = (int)Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
+            for (int i = (int)xmin; i <= xmax; i+=step)
             {
                 line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
                 line.X1 = centerx - 2; line.X2 = centerx + 2; line.Y1 = (int)(i * -1 * yproj) + centery; line.Y2 = (int)(i * -1 * yproj) + centery;
 
-                // метка для значения x
-                Label l = new Label(); l.Content = (i * -1).ToString();
+                // метка для значения y
+                Label l = new Label(); ; l.FontSize = 8; l.Content = (i * -1).ToString();
                 // вычисляем размер текста до рендера, чтобы отцентрировать метку
                 l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Size s = l.DesiredSize;
