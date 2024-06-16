@@ -37,7 +37,7 @@ namespace MathGraph.Model
                         double arg1 = Convert.ToDouble(args.Parameters[0].Evaluate());
                         double arg2 = Convert.ToDouble(args.Parameters[1].Evaluate());
                         double res = Math.Pow(arg1, arg2);
-                        if (double.IsNaN(res) || res > 999999999999999999)
+                        if (double.IsNaN(res) || res > 9999999999999999 || res < -9999999999999999)
                         {
                             res = 0;
                             m_MathCondition = new string[1] { "pwfuncerr" };
