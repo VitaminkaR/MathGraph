@@ -135,7 +135,12 @@ namespace MathGraph
                 line.X1 = (int)(i * xproj) + centerx; line.X2 = (int)(i * xproj) + centerx; line.Y1 = centery - 2; line.Y2 = centery + 2;
 
                 // метка для значения x
-                Label l = new Label(); l.FontSize = 8; l.Content = Math.Round((decimal)i, (int)Math.Log(step, 0.1) + 1).ToString();
+                int decimals = (int)Math.Log(step, 0.1) + 1;
+                if (decimals <= 0)
+                    decimals = 1;
+                if (decimals > 28)
+                    decimals = 28;
+                Label l = new Label(); l.FontSize = 8; l.Content = Math.Round((decimal)i, decimals).ToString();
                 // вычисляем размер текста до рендера, чтобы отцентрировать метку
                 l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Size s = l.DesiredSize;
@@ -156,7 +161,12 @@ namespace MathGraph
                 line.X1 = centerx - 2; line.X2 = centerx + 2; line.Y1 = (int)(i * -1 * yproj) + centery; line.Y2 = (int)(i * -1 * yproj) + centery;
 
                 // метка для значения y
-                Label l = new Label(); ; l.FontSize = 8; l.Content = Math.Round((decimal)i, (int)Math.Log(step, 0.1) + 1).ToString();
+                int decimals = (int)Math.Log(step, 0.1) + 1;
+                if (decimals <= 0)
+                    decimals = 1;
+                if (decimals > 28)
+                    decimals = 28;
+                Label l = new Label(); ; l.FontSize = 8; l.Content = Math.Round((decimal)i, decimals).ToString();
                 // вычисляем размер текста до рендера, чтобы отцентрировать метку
                 l.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 Size s = l.DesiredSize;
