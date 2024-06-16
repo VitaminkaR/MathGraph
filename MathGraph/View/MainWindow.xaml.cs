@@ -129,7 +129,7 @@ namespace MathGraph
             Canvas_DrawArea.Children.Add(line);
             double step = Math.Pow(5, Math.Floor(Math.Log10(xmax - xmin)) - 1);
             if (step <= 0) step = 1;
-            for (double i = xmin; i <= xmax; i += step)
+            for (double i = xmin; i <= xmax + 0.00001; i += step)
             {
                 line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
                 line.X1 = (int)(i * xproj) + centerx; line.X2 = (int)(i * xproj) + centerx; line.Y1 = centery - 2; line.Y2 = centery + 2;
@@ -155,7 +155,7 @@ namespace MathGraph
             Canvas_DrawArea.Children.Add(line);
             step = Math.Pow(5, Math.Floor(Math.Log10(ymax - ymin)) - 1);
             if (step <= 0) step = 1;
-            for (double i = ymin; i <= ymax + 0.00000000001; i += step)
+            for (double i = ymin; i <= ymax + 0.00001; i += step)
             {
                 line = new Line(); line.Stroke = Brushes.Black; line.StrokeThickness = 2;
                 line.X1 = centerx - 2; line.X2 = centerx + 2; line.Y1 = (int)(i * -1 * yproj) + centery; line.Y2 = (int)(i * -1 * yproj) + centery;
