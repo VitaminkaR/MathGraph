@@ -37,12 +37,20 @@ namespace MathGraph
 
         // обработчик ошибок
         // 0 - ошика вычисления
+        // 1 - ошибка установки минимального значения иксов
+        // 2 - ошибка установки минимального значения иксов
         private void ErrorHandler(int code, string errmsg)
         {
             switch (code)
             {
                 case 0:
                     MessageBox.Show($"Ошибка расчета функции\nПодробнее: {errmsg}", "Ошибка");
+                    break;
+                case 1:
+                    MessageBox.Show("Значение должно быть меньше значения максимального икса");
+                    break;
+                case 2:
+                    MessageBox.Show("Значение должно быть больше значения минимального икса");
                     break;
                 default:
                     MessageBox.Show($"Ошибка\nПодробнее: {errmsg}", "Ошибка");

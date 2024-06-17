@@ -21,9 +21,17 @@ namespace MathGraph.ViewModel
             get => m_Solver.AreaRange.X;
             set
             {
-                m_Solver.AreaRange = new Vector2((float)value, m_Solver.AreaRange.Y);
-                AutoAccuracyEval();
-                OnPropertyChanged("DrawAreaXMinRange");
+                if (value < m_Solver.AreaRange.Y)
+                {
+                    m_Solver.AreaRange = new Vector2((float)value, m_Solver.AreaRange.Y);
+                    AutoAccuracyEval();
+                    OnPropertyChanged("DrawAreaXMinRange");
+                }
+                else
+                {
+                    DrawAreaXMinRange = DrawAreaXMaxRange - 1;
+                    OnError?.Invoke(1, "");
+                }   
             }
         }
 
@@ -32,9 +40,17 @@ namespace MathGraph.ViewModel
             get => m_Solver.AreaRange.Y;
             set
             {
-                m_Solver.AreaRange = new Vector2(m_Solver.AreaRange.X, (float)value);
-                AutoAccuracyEval();
-                OnPropertyChanged("DrawAreaXMaxMRange");
+                if (value > m_Solver.AreaRange.X)
+                {
+                    m_Solver.AreaRange = new Vector2(m_Solver.AreaRange.X, (float)value);
+                    AutoAccuracyEval();
+                    OnPropertyChanged("DrawAreaXMaxMRange");
+                }
+                else
+                {
+                    DrawAreaXMaxRange  = DrawAreaXMinRange + 1;
+                    OnError?.Invoke(2, "");
+                }
             }
         }
 
@@ -67,6 +83,8 @@ namespace MathGraph.ViewModel
         public Action<List<Point>> OnGraphSolved { get; set; }
         // обработчик ошибок
         // 0 - ошика вычисления
+        // 1 - ошибка установки минимального значения иксов
+        // 2 - ошибка установки минимального значения иксов
         public Action<int, string> OnError { get; set; }
 
         public ApplicationViewModel()
