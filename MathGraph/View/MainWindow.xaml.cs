@@ -38,7 +38,7 @@ namespace MathGraph
             ((ApplicationViewModel)DataContext).OnError += ErrorHandler;
 
             TB_MaxY.LostFocus += TBMaxYLostFocus;
-            TB_MinY.LostFocus += TBMinYLostFocus; ;
+            TB_MinY.LostFocus += TBMinYLostFocus;
         }
 
         private void TBMinYLostFocus(object sender, RoutedEventArgs e)
@@ -47,7 +47,14 @@ namespace MathGraph
             {
                 try
                 {
-                    DrawGraph(m_Points, double.Parse(TB_MinY.Text), double.Parse(TB_MaxY.Text));
+                    double ymin = double.Parse(TB_MinY.Text);
+                    double ymax = double.Parse(TB_MaxY.Text);
+                    if(ymin >= ymax)
+                    {
+                        ErrorHandler(4, "");
+                        return;
+                    }
+                    DrawGraph(m_Points, ymin, ymax);
                 }
                 catch (Exception)
                 {
@@ -66,7 +73,14 @@ namespace MathGraph
             {
                 try
                 {
-                    DrawGraph(m_Points, double.Parse(TB_MinY.Text), double.Parse(TB_MaxY.Text));
+                    double ymin = double.Parse(TB_MinY.Text);
+                    double ymax = double.Parse(TB_MaxY.Text);
+                    if (ymax <= ymin)
+                    {
+                        ErrorHandler(5, "");
+                        return;
+                    }
+                    DrawGraph(m_Points, ymin, ymax);
                 }
                 catch (Exception)
                 {
@@ -84,8 +98,8 @@ namespace MathGraph
         // 1 - ошибка установки минимального значения иксов
         // 2 - ошибка установки минимального значения иксов
         // 3 - изменение игреков, а функция еще не решена
-        // 4 -  минимальный игрек больше максимульного
-        // 5 - максимальный игрек меньше минимального
+        // 4 -  минимальный игрек меньше максимального
+        // 5 - максимальный игрек больше минимального
         // 6 - неправильный формат
         private void ErrorHandler(int code, string errmsg)
         {
@@ -101,6 +115,8 @@ namespace MathGraph
                     MessageBox.Show("Значение должно быть больше значения минимального икса");
                     break;
                 case 3:
+                    if ((bool)CB_ForceY.IsChecked)
+                        break;
                     double _var = 0;
                     if (double.TryParse(TB_MaxY.Text, out _var) || double.TryParse(TB_MinY.Text, out _var))
                     {
@@ -132,17 +148,33 @@ namespace MathGraph
 
             double ymin = 999999; // минимальное значение функции на промежутке
             double ymax = -999999; // максимальное значения функции на промежутке
-            for (int i = 0; i < points.Count; i++)
-            {
-                double val = points[i].Y;
-                if (val > ymax)
-                    ymax = val;
-                if (val < ymin)
-                    ymin = val;
-            }
 
-            TB_MaxY.Text = ymax.ToString();
-            TB_MinY.Text = ymin.ToString();
+            if ((bool)CB_ForceY.IsChecked)
+            {
+                try
+                {
+                    ymin = double.Parse(TB_MinY.Text);
+                    ymax = double.Parse(TB_MaxY.Text);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Неправильный формат");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < points.Count; i++)
+                {
+                    double val = points[i].Y;
+                    if (val > ymax)
+                        ymax = val;
+                    if (val < ymin)
+                        ymin = val;
+                }
+
+                TB_MaxY.Text = ymax.ToString();
+                TB_MinY.Text = ymin.ToString();
+            }
 
             DrawGraph(points, ymin, ymax);
         }
