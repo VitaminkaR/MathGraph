@@ -24,6 +24,9 @@ namespace MathGraph
         // разрыв графика функции
         private bool m_MathGap;
 
+        // ссылка на данные графика
+        private List<Point> m_Points;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,14 +34,59 @@ namespace MathGraph
 
 
             DataContext = new ApplicationViewModel();
-            ((ApplicationViewModel)DataContext).OnGraphSolved += DrawGraph;
+            ((ApplicationViewModel)DataContext).OnGraphSolved += InitDrawingGraph;
             ((ApplicationViewModel)DataContext).OnError += ErrorHandler;
+
+            TB_MaxY.LostFocus += TBMaxYLostFocus;
+            TB_MinY.LostFocus += TBMinYLostFocus; ;
+        }
+
+        private void TBMinYLostFocus(object sender, RoutedEventArgs e)
+        {
+            if(m_Points != null)
+            {
+                try
+                {
+                    DrawGraph(m_Points, double.Parse(TB_MinY.Text), double.Parse(TB_MaxY.Text));
+                }
+                catch (Exception)
+                {
+                    ErrorHandler(6, "");
+                }
+            }
+            else
+            {
+                ErrorHandler(3, "");
+            }    
+        }
+
+        private void TBMaxYLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (m_Points != null)
+            {
+                try
+                {
+                    DrawGraph(m_Points, double.Parse(TB_MinY.Text), double.Parse(TB_MaxY.Text));
+                }
+                catch (Exception)
+                {
+                    ErrorHandler(6, "");
+                }
+            }
+            else
+            {
+                ErrorHandler(3, "");
+            }
         }
 
         // обработчик ошибок
         // 0 - ошика вычисления
         // 1 - ошибка установки минимального значения иксов
         // 2 - ошибка установки минимального значения иксов
+        // 3 - изменение игреков, а функция еще не решена
+        // 4 -  минимальный игрек больше максимульного
+        // 5 - максимальный игрек меньше минимального
+        // 6 - неправильный формат
         private void ErrorHandler(int code, string errmsg)
         {
             switch (code)
@@ -52,25 +100,35 @@ namespace MathGraph
                 case 2:
                     MessageBox.Show("Значение должно быть больше значения минимального икса");
                     break;
+                case 3:
+                    double _var = 0;
+                    if (double.TryParse(TB_MaxY.Text, out _var) || double.TryParse(TB_MinY.Text, out _var))
+                    {
+                        MessageBox.Show("Вы не можете изменить значения y, до того как решена функция");
+                        TB_MaxY.Text = "-";
+                        TB_MinY.Text = "-";
+                    }
+                    break;
+                case 4:
+                    MessageBox.Show("Значение должно быть меньше значения максимального игрека");
+                    TB_MinY.Text = (double.Parse(TB_MaxY.Text) - 1).ToString();
+                    break;
+                case 5:
+                    MessageBox.Show("Значение должно быть больше значения минимального игрека");
+                    TB_MaxY.Text = (double.Parse(TB_MinY.Text) + 1).ToString();
+                    break;
+                case 6:
+                    MessageBox.Show("Неправильный формат");
+                    break;
                 default:
                     MessageBox.Show($"Ошибка\nПодробнее: {errmsg}", "Ошибка");
                     break;
             }
         }
 
-        private void DrawGraph(List<Point> points)
+        private void InitDrawingGraph(List<Point> points)
         {
-            Canvas_DrawArea.Children.Clear();
-
-            // основная линия графика
-            Polyline polyline = new Polyline();
-            polyline.Stroke = Brushes.Red;
-            polyline.StrokeThickness = 2;
-
-            int width = (int)Canvas_DrawArea.Width; // ширина области
-            int height = (int)Canvas_DrawArea.Height; // высота области
-            int ofsx = (int)Canvas_DrawArea.Margin.Left; // координата x верхнего левого угла области
-            int ofsy = (int)Canvas_DrawArea.Margin.Top;  // координата y верхнего левого угла области
+            m_Points = points;
 
             double ymin = 999999; // минимальное значение функции на промежутке
             double ymax = -999999; // максимальное значения функции на промежутке
@@ -82,6 +140,24 @@ namespace MathGraph
                 if (val < ymin)
                     ymin = val;
             }
+
+            TB_MaxY.Text = ymax.ToString();
+            TB_MinY.Text = ymin.ToString();
+
+            DrawGraph(points, ymin, ymax);
+        }
+
+        private void DrawGraph(List<Point> points, double ymin, double ymax)
+        {
+            Canvas_DrawArea.Children.Clear();
+
+            // основная линия графика
+            Polyline polyline = new Polyline();
+            polyline.Stroke = Brushes.Red;
+            polyline.StrokeThickness = 2;
+
+            int width = (int)Canvas_DrawArea.Width; // ширина области
+            int height = (int)Canvas_DrawArea.Height; // высота области
 
             double xmin = double.Parse(TB_MinX.Text.Replace(".", ",")); // минимальное значение х на промежутке
             double xmax = double.Parse(TB_MaxX.Text.Replace(".", ",")); // максимальное значение х на промежутке

@@ -15,10 +15,15 @@
         <Label Content="Точность: " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="65"/>
         <TextBox Name="TB_Accuracy" Canvas.Right="32" TextWrapping="Wrap" Text="{Binding Accuracy}" BorderThickness="2" BorderBrush="Black" Canvas.Top="70" Width="120" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
 
-        <Label Content="Введите функцию графика: " HorizontalContentAlignment="Center" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="95"  Canvas.Left="815" Width="455"/>
-        <TextBox Name="TB_Function"  Canvas.Right="32" TextWrapping="Wrap" Text="{Binding Function}" BorderThickness="2" BorderBrush="Black" Canvas.Top="130" Width="414" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+        <Label Content="Диапозон значений y (минимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="95"/>
+        <TextBox Name="TB_MinY" Canvas.Right="32" TextWrapping="Wrap" BorderThickness="2" Text="-" BorderBrush="Black" Canvas.Top="100" Width="120" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+        <Label Content="Диапозон значений y (максимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="125"/>
+        <TextBox Name="TB_MaxY" Canvas.Right="32" TextWrapping="Wrap" BorderThickness="2" Text="-" BorderBrush="Black" Canvas.Top="130" Width="120" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
 
-        <Button Name="B_SolveFunction" Content="Solve"  Command="{Binding SolveDrawCommand}" Canvas.Right="32" BorderThickness="2" BorderBrush="Black" Canvas.Top="160" Width="128" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+        <Label Content="Введите функцию графика: " HorizontalContentAlignment="Center" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="170"  Canvas.Left="815" Width="455"/>
+        <TextBox Name="TB_Function"  Canvas.Right="32" TextWrapping="Wrap" Text="{Binding Function}" BorderThickness="2" BorderBrush="Black" Canvas.Top="200" Width="414" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+        <Button Name="B_SolveFunction" Content="Solve"  Command="{Binding SolveDrawCommand}" Canvas.Right="32" BorderThickness="2" BorderBrush="Black" Canvas.Top="230" Width="128" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
+        
         <Canvas Name="Canvas_DrawArea" Height="650" Width="800" Margin="10 10 0 0"/>
     </Canvas>
 </Window>
