@@ -209,7 +209,7 @@ namespace MathGraph
                 cy *= -1; // координаты элементов в wpf имеет противоположную направленность относительно декартовых координат
 
                 // если значению отсутствует делаем разрыв
-                if (double.IsNaN(cx) && !m_MathGap)
+                if ((double.IsNaN(cx) || cy > ymax || cy < ymin) && !m_MathGap)
                 {
                     m_MathGap = true;
                     Canvas_DrawArea.Children.Add(polyline);
@@ -218,7 +218,7 @@ namespace MathGraph
                     polyline.StrokeThickness = 2;
                 }
 
-                if (m_MathGap && !double.IsNaN(cx))
+                if (m_MathGap && !(double.IsNaN(cx) || cy > ymax || cy < ymin))
                     m_MathGap = false;
 
                 int x1coord = (int)(cx * xproj) + centerx;
