@@ -101,6 +101,7 @@ namespace MathGraph
         // 4 -  минимальный игрек меньше максимального
         // 5 - максимальный игрек больше минимального
         // 6 - неправильный формат
+        // 7 - неправильно установлено значния точности
         private void ErrorHandler(int code, string errmsg)
         {
             switch (code)
@@ -135,6 +136,9 @@ namespace MathGraph
                     break;
                 case 6:
                     MessageBox.Show("Неправильный формат");
+                    break;
+                case 7:
+                    MessageBox.Show("Значение точности должно быть больше 0");
                     break;
                 default:
                     MessageBox.Show($"Ошибка\nПодробнее: {errmsg}", "Ошибка");

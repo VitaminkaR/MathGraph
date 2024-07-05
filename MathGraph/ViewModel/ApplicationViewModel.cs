@@ -59,7 +59,15 @@ namespace MathGraph.ViewModel
             get => m_Solver.Accuracy;
             set
             {
-                m_Solver.Accuracy = value;
+                if(value > 0)
+                {
+                    m_Solver.Accuracy = value;
+                }
+                else
+                {
+                    OnError?.Invoke(7, "");
+                    m_Solver.Accuracy = 1;
+                }
                 OnPropertyChanged("Accuracy");
             }
         }
