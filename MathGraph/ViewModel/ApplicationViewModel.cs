@@ -66,7 +66,7 @@ namespace MathGraph.ViewModel
                 else
                 {
                     OnError?.Invoke(7, "");
-                    m_Solver.Accuracy = 1;
+                    AutoAccuracyEval();
                 }
                 OnPropertyChanged("Accuracy");
             }
