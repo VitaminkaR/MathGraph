@@ -8,16 +8,16 @@
         Title="MathGraph" Height="720" Width="1280" Icon="/View/icon.ico" ResizeMode="NoResize">
     <Canvas>
         <Rectangle Name="Rect_DrawArea" HorizontalAlignment="Left" Height="650" Canvas.Left="10" Canvas.Top="10" Stroke="Black" StrokeThickness="2" VerticalAlignment="Center" Width="800"/>
-        <Label Content="Диапозон значений x (минимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="5"/>
+        <Label Content="Диапазон значений x (минимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="5"/>
         <TextBox Name="TB_MinX" Canvas.Right="32" TextWrapping="Wrap" Text="{Binding DrawAreaXMinRange}" BorderThickness="2" BorderBrush="Black" Canvas.Top="10" Width="120" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
-        <Label Content="Диапозон значений x (максимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="35"/>
+        <Label Content="Диапазон значений x (максимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="35"/>
         <TextBox Name="TB_MaxX" Canvas.Right="32" TextWrapping="Wrap" Text="{Binding DrawAreaXMaxRange}" BorderThickness="2" BorderBrush="Black" Canvas.Top="40" Width="120" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
         <Label Content="Точность: " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="65"/>
         <TextBox Name="TB_Accuracy" Canvas.Right="32" TextWrapping="Wrap" Text="{Binding Accuracy}" BorderThickness="2" BorderBrush="Black" Canvas.Top="70" Width="120" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
 
-        <Label Content="Диапозон значений y (минимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="95"/>
+        <Label Content="Диапазон значений y (минимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="95"/>
         <TextBox Name="TB_MinY" Canvas.Right="32" TextWrapping="Wrap" BorderThickness="2" Text="-" BorderBrush="Black" Canvas.Top="100" Width="120" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
-        <Label Content="Диапозон значений y (максимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="125"/>
+        <Label Content="Диапазон значений y (максимальное): " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="125"/>
         <TextBox Name="TB_MaxY" Canvas.Right="32" TextWrapping="Wrap" BorderThickness="2" Text="-" BorderBrush="Black" Canvas.Top="130" Width="120" FontFamily="Comic Sans MS Bold" FontSize="14" HorizontalContentAlignment="Center"/>
 
         <Label Content="Принудительная установка Y: " Canvas.Left="815" FontFamily="Comic Sans MS Bold" FontSize="14" Canvas.Top="163"/>
