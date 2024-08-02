@@ -176,8 +176,8 @@ namespace MathGraph
                         ymin = val;
                 }
 
-                TB_MaxY.Text = ymax.ToString();
-                TB_MinY.Text = ymin.ToString();
+                TB_MaxY.Text = double.Round(ymax, 5).ToString();
+                TB_MinY.Text = double.Round(ymin, 5).ToString();
             }
 
             DrawGraph(points, ymin, ymax);

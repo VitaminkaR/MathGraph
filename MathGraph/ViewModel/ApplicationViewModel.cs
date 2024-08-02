@@ -18,12 +18,12 @@ namespace MathGraph.ViewModel
 
         public double DrawAreaXMinRange
         {
-            get => m_Solver.AreaRange.X;
+            get => float.Round(m_Solver.AreaRange.X, 5);
             set
             {
                 if (value < m_Solver.AreaRange.Y)
                 {
-                    m_Solver.AreaRange = new Vector2((float)value, m_Solver.AreaRange.Y);
+                    m_Solver.AreaRange = new Vector2(float.Round((float)value, 5), m_Solver.AreaRange.Y);
                     AutoAccuracyEval();
                     OnPropertyChanged("DrawAreaXMinRange");
                 }
@@ -37,12 +37,12 @@ namespace MathGraph.ViewModel
 
         public double DrawAreaXMaxRange
         {
-            get => m_Solver.AreaRange.Y;
+            get => float.Round(m_Solver.AreaRange.Y, 5);
             set
             {
                 if (value > m_Solver.AreaRange.X)
                 {
-                    m_Solver.AreaRange = new Vector2(m_Solver.AreaRange.X, (float)value);
+                    m_Solver.AreaRange = new Vector2(m_Solver.AreaRange.X, float.Round((float)value, 5));
                     AutoAccuracyEval();
                     OnPropertyChanged("DrawAreaXMaxMRange");
                 }
@@ -56,12 +56,12 @@ namespace MathGraph.ViewModel
 
         public double Accuracy
         {
-            get => m_Solver.Accuracy;
+            get => double.Round(m_Solver.Accuracy, 5);
             set
             {
                 if(value > 0)
                 {
-                    m_Solver.Accuracy = value;
+                    m_Solver.Accuracy = double.Round(value, 5);
                 }
                 else
                 {
